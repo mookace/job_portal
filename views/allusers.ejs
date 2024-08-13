@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Portal</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div
+        class="container"
+        style="display: flex; justify-content: space-between"
+      >
+        <div>
+          <form class="d-flex" method="post" action="/api/admin/searchuser">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Enter user Email"
+              aria-label="Search"
+              name="search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+        <div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/admin/homepage"
+                >Post Jobs</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/admin/alljobs"
+                >All Jobs</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/admin/allusers"
+                >All Users</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/api/admin/logout"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Alert message -->
+    <% if(Errmsg.length>0){%>
+    <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong><%=Errmsg%></strong>
+    </div>
+    <%}%>
+
+    <!-- Success message -->
+    <% if(message.length>0){%>
+    <div class="alert alert-success alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong><%=message%></strong>
+    </div>
+    <%}%>
+
+    <!-- All Data -->
+    <div class="container mt-5 mb-5">
+      <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Fullname</th>
+            <th scope="col">Role</th>
+            <th scope="col">Active</th>
+            <th scope="col">CV</th>
+            <th scope="col">Created Date</th>
+            <th scope="col">Update Date</th>
+            <th scope="col">View Details</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(allusers.length==0) {%>
+          <h1 style="text-align: center; color: red">No Data Available</h1>
+          <%}%>
+          <!-- Show Data -->
+          <% allusers.forEach((user)=>{ %>
+          <tr>
+            <td><%=user.email%></td>
+            <td><%=user.fullname%></td>
+            <td><%=user.role%></td>
+            <td><%=user.is_active%></td>
+            <td>
+              <a href="<%= '/api/admin/downloadfile?id=' + user.id %>">
+                <%=user.cv%>
+              </a>
+            </td>
+            <td><%=user.created_at%></td>
+            <td><%=user.updated_at%></td>
+            <td>
+              <a
+                href="<%= '/api/admin/userdetails?id=' + user.id %>"
+                class="btn btn-success"
+              >
+                View Details
+              </a>
+            </td>
+            <td>
+              <a
+                href="<%= '/api/admin/updateprofile?id=' + user.id %>"
+                class="btn btn-info"
+              >
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </a>
+            </td>
+            <td>
+              <a
+                href="<%= '/api/admin/deleteprofile?id=' + user.id %>"
+                class="btn btn-danger"
+              >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </a>
+            </td>
+          </tr>
+          <%})%>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="https://use.fontawesome.com/a6508ff195.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

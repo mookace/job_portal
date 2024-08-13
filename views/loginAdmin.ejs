@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- Alert message -->
+    <% if(Errmsg.length>0){%>
+    <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong><%=Errmsg%></strong>
+    </div>
+    <%}%>
+
+    <!-- Success message -->
+    <% if(message.length>0){%>
+    <div class="alert alert-success alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong><%=message%></strong>
+    </div>
+    <%}%>
+
+    <!-- All Data -->
+    <div class="container">
+      <h1 class="mt-5 mb-5 text-center text-primary"><b>Admin Login</b></h1>
+      <div class="row mt-5">
+        <div class="col-md-3">&nbsp;</div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">Admin Login</div>
+            <div class="card-body">
+              <form action="/api/admin/login" method="post">
+                <div class="mb-3">
+                  <label for="email">Email</label>
+                  <input
+                    type="text"
+                    name="email"
+                    class="form-control"
+                    required
+                  />
+                  <div class="email error"></div>
+                </div>
+                <div class="mb-3">
+                  <label for="password">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    required
+                  />
+                  <div class="password error"></div>
+                </div>
+
+                <div class="mb-3">
+                  <input type="submit" class="btn btn-primary" value="Submit" />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+      integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

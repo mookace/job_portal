@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Portal</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container" style="display: flex; justify-content: end">
+        <div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/admin/alljobs"
+                >All Jobs</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/admin/allusers"
+                >All Users</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/api/admin/logout"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Alert message -->
+    <% if(Errmsg.length>0){%>
+    <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong><%=Errmsg%></strong>
+    </div>
+    <%}%>
+
+    <!-- Success message -->
+    <% if(message.length>0){%>
+    <div class="alert alert-success alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong><%=message%></strong>
+    </div>
+    <%}%>
+
+    <!-- All Data -->
+    <div class="container">
+      <h1 class="mt-5 mb-5 text-center text-primary"><b>Post Jobs</b></h1>
+      <div class="row mt-5 mb-5">
+        <div class="col-md-3">&nbsp;</div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">Post Jobs</div>
+            <div class="card-body">
+              <form action="/api/admin/postjob" method="post">
+                <div class="mb-3">
+                  <label for="text">Company Name:</label>
+                  <input
+                    type="text"
+                    name="company_name"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="text">Job Title:</label>
+                  <input
+                    type="text"
+                    name="job_title"
+                    class="form-control"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="text">No of Openings:</label>
+                  <input
+                    type="number"
+                    name="no_of_openings"
+                    class="form-control"
+                    min="1"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="text">Job Category:</label>
+                  <input
+                    type="text"
+                    name="job_category"
+                    class="form-control"
+                    value="IT / Telecommunication"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="text">Job Location:</label>
+                  <input
+                    type="text"
+                    name="job_location"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="text">Job Level:</label>
+                  <input
+                    type="text"
+                    name="job_level"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="text">Experience:</label>
+                  <input
+                    type="text"
+                    name="experience"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="text">Expiry Date:</label>
+                  <input
+                    type="text"
+                    name="expiry_date"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="text">Required Skills:</label>
+                  <input
+                    type="text"
+                    name="skills"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="text">Job Description:</label>
+                  <input
+                    type="text"
+                    name="job_description"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="text">Salary:</label>
+                  <input
+                    type="text"
+                    name="salary"
+                    class="form-control"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <input type="submit" class="btn btn-primary" value="Submit" />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://use.fontawesome.com/a6508ff195.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+      integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

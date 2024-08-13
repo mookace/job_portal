@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Portal</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container" style="display: flex; justify-content: end">
+        <div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/admin/homepage"
+                >Post Job</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/admin/alljobs"
+                >All Jobs</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/admin/allusers"
+                >All Users</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/api/admin/logout"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Alert message -->
+    <% if(Errmsg.length>0){%>
+    <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong><%=Errmsg%></strong>
+    </div>
+    <%}%>
+
+    <!-- Success message -->
+    <% if(message.length>0){%>
+    <div class="alert alert-success alert-dismissible">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong><%=message%></strong>
+    </div>
+    <%}%>
+
+    <!-- New All Data -->
+    <div class="container">
+      <div class="row mt-5 mb-5">
+        <div class="col-md-3">
+          <% if(alljobs.length==0) {%>
+          <h1 style="text-align: center; color: red">No Data Available</h1>
+          <%}%>
+          <!-- Show Data -->
+          <% alljobs.forEach((job)=> { %>
+          <div class="card">
+            <div class="card-header">
+              <h4><%= job.job_title %></h4>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <b>Company: </b><%= job.company_name %>
+                </li>
+                <li class="list-group-item">
+                  <b>No of opening: </b><%= job.no_of_openings %>
+                </li>
+                <li class="list-group-item">
+                  <b>Category: </b><%= job.job_category %>
+                </li>
+                <li class="list-group-item">
+                  <b>Location: </b><%= job.job_location %>
+                </li>
+                <li class="list-group-item">
+                  <b>Level: </b><%= job.job_level %>
+                </li>
+                <li class="list-group-item">
+                  <b>Experience:</b><%= job.experience %>
+                </li>
+                <li class="list-group-item">
+                  <b>Expiry date: </b><%= job.expiry_date %>
+                </li>
+                <li class="list-group-item">
+                  <b>Skills: </b><%= job.skills %>
+                </li>
+                <li class="list-group-item">
+                  <b>Description: </b><%= job.job_description %>
+                </li>
+                <li class="list-group-item">
+                  <b>Salary: </b><%= job.salary %>
+                </li>
+              </ul>
+            </div>
+            <div class="card-footer">
+              <a
+                href="<%= '/api/admin/deletejob?id=' + job.id %>"
+                class="btn btn-danger"
+                >Delete Job</a
+              >
+            </div>
+          </div>
+          <% }) %>
+        </div>
+
+        <div class="container col-md-9">
+          <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Job Applied By</th>
+                <th scope="col">Applied Date</th>
+                <th scope="col">Cv</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if(data.length==0) {%>
+              <h1 style="text-align: center; color: red">No Data Available</h1>
+              <%}%>
+              <!-- Show Data -->
+              <% data.forEach((e)=> { %>
+              <tr>
+                <td><%=e.email%></td>
+                <td><%=e.applied_at%></td>
+                <td>
+                  <a
+                    href="<%= '/api/admin/downloadfile?id=' + e.user_id +'&jobId='+e.job_id %>"
+                  >
+                    <%=e.cv%>
+                  </a>
+                </td>
+              </tr>
+              <%})%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://use.fontawesome.com/a6508ff195.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+      integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
